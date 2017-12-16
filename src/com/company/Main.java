@@ -24,18 +24,18 @@ public class Main {
 
     private static boolean compareAttemptWithPassword(String attemptStorage, String passwordStorage) throws IOException {
         InputStream temp = new FileInputStream(attemptStorage);
-        InputStream password = new FileInputStream(passwordStorage); //Main.class.getResourceAsStream("/password.txt");
+        InputStream password = Main.class.getResourceAsStream("/password"); //new FileInputStream(passwordStorage); //
         try {
             while (true) {
-                int fr = temp.read();
-                int tr = password.read();
+                int bytesFromTemp = temp.read();
+                int bytesFromPassword = password.read();
 
-                if (fr != tr) {
+                if (bytesFromTemp != bytesFromPassword) {
                     System.out.println("Wrong password");
                     return false;
                 }
 
-                if (fr == -1) {
+                if (bytesFromTemp == -1) {
                     System.out.println("Right password");
                     success = true;
                     return true;
